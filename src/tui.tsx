@@ -5,7 +5,6 @@ export default {
     // 1. Register the component in the TUI Slots (above prompt or bottom bar)
     // The exact slot name ('home_prompt' / 'home_bottom') depends on OpenCode SDK.
     api.slots.register({
-      id: "buddy-home-prompt",
       home_prompt: () => <BuddyWidget />
     });
 

@@ -31,18 +31,18 @@ bun install
 ```
 
 ### 2. Add to OpenCode Configuration
-Open your global `opencode` config file (usually located at `~/.opencode/opencode.json` or `.opencode/config.json`) and add the absolute path to this folder in your `plugins` array:
+OpenCode manages its global plugins via a central `package.json` located at `~/.config/opencode/`.
 
-```json
-{
-  "plugin": [
-    "/absolute/path/to/opencode-buddy"
-  ]
-}
+To install the buddy plugin globally to your OpenCode:
+```bash
+cd ~/.config/opencode
+bun add /path/to/your/opencode-buddy
 ```
+*(Replace `/path/to/your/opencode-buddy` with the actual path, e.g. `/home/aziz/Desktop/.../opencode-buddy`)*
 
-### 3. Restart OpenCode
-Once you restart the `opencode` CLI, the TUI will dynamically load the buddy widget right above your prompt, and the AI Soul will take over! 🧠
+### 3. Activate the Plugin
+Once the dependencies are updated, restart the `opencode` CLI or run `/plugin activate opencode-buddy` if OpenCode supports live activation.
+The TUI will dynamically load the buddy widget right above your prompt, and the AI Soul will take over! 🧠
 
 ---
 

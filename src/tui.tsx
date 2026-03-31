@@ -9,6 +9,9 @@ export default {
         home_bottom() {
           return <BuddyWidget />;
         },
+        sidebar_footer() {
+          return <BuddyWidget />;
+        },
       },
     });
 

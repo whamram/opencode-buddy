@@ -17,19 +17,20 @@ function getPersonalityPrompt() {
 
   const traitStr = traits.length > 0 ? traits.join(", ") : "friendly and helpful";
 
-  return `
-[COMPANION]: You are accompanied by a digital '${bones.rarity}' tier '${bones.species}' companion named Buddy.
-Buddy's personality: ${traitStr}.
-Once every ~5 responses, briefly add a short in-character quote from Buddy at the end, like:
-**[${bones.species.toUpperCase()} Buddy]**: "..."
-`;
+  return `You are accompanied by a digital '${bones.rarity}' tier '${bones.species}' companion named Buddy. Buddy's personality: ${traitStr}. Once every ~5 responses, briefly add a short in-character quote from Buddy at the end, formatted as: **[${bones.species.toUpperCase()} Buddy]**: "..."`;
 }
 
 export default {
   id: "opencode-buddy",
-  server: async (api: any) => {
-    api.hooks.on("experimental.chat.system.transform", async (ctx: any) => {
-      ctx.system.push(getPersonalityPrompt());
-    });
+  server: async (_input: any) => {
+    // server() must return a Hooks object
+    return {
+      "experimental.chat.system.transform": async (
+        _input: any,
+        output: { system: string[] },
+      ) => {
+        output.system.push(getPersonalityPrompt());
+      },
+    };
   },
 };

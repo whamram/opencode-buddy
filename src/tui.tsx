@@ -4,7 +4,7 @@ export default {
   id: "opencode-buddy-tui",
   tui: async (api: any) => {
     api.slots.register({
-      home_prompt: () => <BuddyWidget />,
+      home_bottom: () => <BuddyWidget />,
     });
 
     api.command.register(() => [

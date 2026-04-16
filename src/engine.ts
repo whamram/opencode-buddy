@@ -7,9 +7,43 @@ import {
   RARITY_WEIGHTS,
   Rarity,
   SPECIES,
+  Species,
   STAT_NAMES,
   StatName
 } from "./types.js";
+
+const SPECIES_NAMES: Record<Species, string[]> = {
+  cat: [
+    "Whiskers", "Patches", "Mittens", "Shadow", "Luna",
+    "Mochi", "Cleo", "Noodle", "Beans", "Pixel",
+    "Ziggy", "Hazel", "Tuna", "Velvet", "Marmalade",
+    "Socks", "Biscuit", "Pip", "Fig", "Dot",
+  ],
+  dragon: [
+    "Ember", "Fafnir", "Smauglet", "Drift", "Pyra",
+    "Ashwick", "Scorch", "Talon", "Flint", "Vortex",
+    "Cinder", "Ignis", "Blaze", "Stormscale", "Furnace",
+    "Falkor", "Drak", "Magma", "Kindle", "Ash",
+  ],
+  duck: [
+    "Waddle", "Quackers", "Puddle", "Noodle", "Mallard",
+    "Dabble", "Pebble", "Splash", "Bill", "Marsh",
+    "Pond", "Ripple", "Dewey", "Paddles", "Drake",
+    "Muddy", "Reeds", "Brooks", "Plop", "Ducky",
+  ],
+  ghost: [
+    "Specter", "Breeze", "Wisp", "Hollow", "Phantom",
+    "Echo", "Shade", "Murmur", "Misty", "Chill",
+    "Veil", "Wraith", "Frost", "Shimmer", "Fog",
+    "Cold", "Moan", "Glimmer", "Trace", "Void",
+  ],
+  robot: [
+    "Bolt", "Unit", "Pixel", "Zero", "Circuit",
+    "Glitch", "Byte", "Spark", "Rusty", "Servo",
+    "Relay", "Diode", "Matrix", "Chip", "Probe",
+    "Weld", "Socket", "Qubit", "Arc", "Fuse",
+  ],
+};
 
 // Mulberry32 PRNG - deterministic, reproducible per-user
 function mulberry32(seed: number): () => number {
@@ -73,12 +107,14 @@ export const SALT = "friend-2026-opencode";
 export function generateBones(identifier: string): CompanionBones {
   const seedHash = hashString(identifier + SALT);
   const rng = mulberry32(seedHash);
-  
+
   const rarity = rollRarity(rng);
-  
+  const species = pick(rng, SPECIES);
+
   return {
+    name: pick(rng, SPECIES_NAMES[species]),
     rarity,
-    species: pick(rng, SPECIES),
+    species,
     eye: pick(rng, EYES),
     hat: rarity === "common" ? "none" : pick(rng, HATS),
     shiny: rng() < 0.01,

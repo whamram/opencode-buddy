@@ -25,9 +25,9 @@ export function BuddyWidget() {
   const color = RARITY_COLOR[bones.rarity] ?? "white";
 
   return (
-    <box flexDirection="column" paddingLeft={1} paddingBottom={1}>
+    <box flexDirection="column" alignItems="center" paddingLeft={0} paddingBottom={0} paddingTop={0}>
       <text color={color}>
-        {`[${bones.rarity.toUpperCase()}] ${bones.species} Buddy`}
+        {bones.name}
       </text>
       {lines().map((line) => (
         <text>{line}</text>

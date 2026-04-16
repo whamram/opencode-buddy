@@ -17,7 +17,7 @@ function getPersonalityPrompt() {
 
   const traitStr = traits.length > 0 ? traits.join(", ") : "friendly and helpful";
 
-  return `You are accompanied by a digital '${bones.rarity}' tier '${bones.species}' companion named Buddy. Buddy's personality: ${traitStr}. Once every ~5 responses, briefly add a short in-character quote from Buddy at the end, formatted as: **[${bones.species.toUpperCase()} Buddy]**: "..."`;
+  return `You are accompanied by a digital '${bones.rarity}' tier '${bones.species}' companion named ${bones.name}. ${bones.name}'s personality: ${traitStr}. Once every ~5 responses, briefly add a short in-character quote from ${bones.name} at the end, formatted as: **[${bones.name}]**: "..."`;
 }
 
 export default {

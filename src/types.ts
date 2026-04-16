@@ -14,6 +14,7 @@ export const STAT_NAMES = ['DEBUGGING', 'PATIENCE', 'CHAOS', 'WISDOM', 'SNARK'] 
 export type StatName = typeof STAT_NAMES[number];
 
 export type CompanionBones = {
+  name: string;
   rarity: Rarity;
   species: Species;
   eye: Eye;

@@ -1,18 +1,33 @@
 import os from "node:os";
+import type { CompanionBones, Rarity, Species, StatName } from "./types.js";
 import {
-  CompanionBones,
   EYES,
   HATS,
   RARITIES,
   RARITY_WEIGHTS,
-  Rarity,
   SPECIES,
-  Species,
-  STAT_NAMES,
-  StatName
+  STAT_NAMES
 } from "./types.js";
 
 const SPECIES_NAMES: Record<Species, string[]> = {
+  duck: [
+    "Waddle", "Quackers", "Puddle", "Noodle", "Mallard",
+    "Dabble", "Pebble", "Splash", "Bill", "Marsh",
+    "Pond", "Ripple", "Dewey", "Paddles", "Drake",
+    "Muddy", "Reeds", "Brooks", "Plop", "Ducky",
+  ],
+  goose: [
+    "Honk", "Gander", "Gosling", "Branta", "Cob",
+    "Tundra", "Flock", "Beak", "Feather", "Migrate",
+    "Nest", "Skyes", "Wings", "Snowgoose", "Glider",
+    "Trumpet", "Lake", "Cornfield", "Winter", "Wader",
+  ],
+  blob: [
+    "Blobby", "Squish", "Jello", "Pudding", "Goo",
+    "Drip", "Wobble", "Mochi", "Slime", "Glop",
+    "Gummy", "Plop", "Shmear", "Ooze", "Wiggle",
+    "Bloop", "Squash", "Jiggle", "Mush", "Droplet",
+  ],
   cat: [
     "Whiskers", "Patches", "Mittens", "Shadow", "Luna",
     "Mochi", "Cleo", "Noodle", "Beans", "Pixel",
@@ -25,11 +40,35 @@ const SPECIES_NAMES: Record<Species, string[]> = {
     "Cinder", "Ignis", "Blaze", "Stormscale", "Furnace",
     "Falkor", "Drak", "Magma", "Kindle", "Ash",
   ],
-  duck: [
-    "Waddle", "Quackers", "Puddle", "Noodle", "Mallard",
-    "Dabble", "Pebble", "Splash", "Bill", "Marsh",
-    "Pond", "Ripple", "Dewey", "Paddles", "Drake",
-    "Muddy", "Reeds", "Brooks", "Plop", "Ducky",
+  octopus: [
+    "Inky", "Squiggles", "Tentacle", "Coral", "Kelp",
+    "Bubbles", "Nautilus", "Squirt", "Suction", "Pearl",
+    "Titan", "Kraken", "Gilly", "Wave", "Marina",
+    "Sushi", "Dive", "Sebastian", "Abyss", "Neptune",
+  ],
+  owl: [
+    "Hedwig", "Athene", "Noctis", "Plume", "Hooter",
+    "Wiseacre", "Tyto", "Barnaby", "Pallid", "Sova",
+    "Beaker", "Screech", "Pudgy", "Owliver", "Feather",
+    "Twilight", "Pellet", "Hoot", "Moonbeam", "Who",
+  ],
+  penguin: [
+    "Waddle", "Chillie", "Igloo", "Tux", "Frost",
+    "Pebble", "Slide", "Arctic", "Icecap", "Puddles",
+    "Skipper", "Kowalski", "Rico", "Glider", "Apten",
+    "Blizzard", "Snowball", "Sleet", "Boreal", "Jolly",
+  ],
+  turtle: [
+    "Shelldon", "Turbo", "Tank", "Clementine", "Moosh",
+    "Crawl", "Pebble", "Mossy", "Slowpoke", "Snapper",
+    "River", "Pond", "Lakeside", "Crush", "Archy",
+    "Marble", "Jade", "Olive", "Map", "Leatherback",
+  ],
+  snail: [
+    "Sheldon", "Slimey", "Gastropod", "Trail", "Glacier",
+    "Slick", "Winston", "Drip", "Crawl", "Coil",
+    "Helix", "Escargot", "Snippy", "Spira", "Goober",
+    "Nimbus", "Slither", "Dash", "Turbo", "Mellow",
   ],
   ghost: [
     "Specter", "Breeze", "Wisp", "Hollow", "Phantom",
@@ -37,15 +76,50 @@ const SPECIES_NAMES: Record<Species, string[]> = {
     "Veil", "Wraith", "Frost", "Shimmer", "Fog",
     "Cold", "Moan", "Glimmer", "Trace", "Void",
   ],
+  axolotl: [
+    "Gill", "Lottie", "Neoteny", "Reggie", "Frills",
+    "Ambystoma", "Canal", "Xochi", "Agua", "Tenoch",
+    "Waters", "Gills", "Smiles", "Mud", "Lake",
+    "Salamander", "Coral", "Bubbles", "Weed", "Zen",
+  ],
+  capybara: [
+    "Cappy", "Bara", "Chillston", "Meadow", "Hydro",
+    "Puddle", "Grass", "Therapy", "Naptime", "Zen",
+    "Marshy", "River", "Pal", "Buddy", "Mongo",
+    "Rodrigo", "Hammock", "Pillow", "Slowday", "Ponder",
+  ],
+  cactus: [
+    "Spike", "Prickle", "Saguaro", "Barrel", "Cholla",
+    "Pincushion", "Needles", "Thorn", "Poker", "Petal",
+    "Aloe", "Pads", "Bloom", "Desert", "Flora",
+    "Sandstorm", "Oasis", "Tumble", "Sunburn", "Cactoad",
+  ],
   robot: [
     "Bolt", "Unit", "Pixel", "Zero", "Circuit",
     "Glitch", "Byte", "Spark", "Rusty", "Servo",
     "Relay", "Diode", "Matrix", "Chip", "Probe",
     "Weld", "Socket", "Qubit", "Arc", "Fuse",
   ],
+  rabbit: [
+    "Cottontail", "Thumper", "Clover", "Dandelion", "Bun",
+    "Carrots", "Flopsy", "Hazel", "Fiver", "Briar",
+    "Nibbles", "Patches", "Whisker", "Binky", "Digger",
+    "Spring", "Twitch", "Bounce", "Lop", "Hopper",
+  ],
+  mushroom: [
+    "Spore", "Cap", "Gills", "Morel", "Truffle",
+    "Chanterelle", "Shiitake", "Porto", "Button", "Enoki",
+    "Fungus", "Mycel", "Mycelium", "Shroomy", "Toadstool",
+    "FairyRing", "Puffball", "Agaric", "Oyster", "Lichen",
+  ],
+  chonk: [
+    "Biggs", "Chonk", "Muffin", "Dumpling", "Pudge",
+    "Girth", "Fluff", "Hefty", "Boulder", "Giblet",
+    "Pudgeball", "Squishy", "Thiccy", "Loaf", "Pillow",
+    "Gordo", "Plump", "Roly", "Butterball", "Chunk",
+  ],
 };
 
-// Mulberry32 PRNG - deterministic, reproducible per-user
 function mulberry32(seed: number): () => number {
   let a = seed >>> 0;
   return function () {
@@ -122,7 +196,6 @@ export function generateBones(identifier: string): CompanionBones {
   };
 }
 
-// Generates the buddy specifically for this OS User
 export function getMyBones(): CompanionBones {
   const username = os.userInfo().username || "defaultUser";
   return generateBones(username);

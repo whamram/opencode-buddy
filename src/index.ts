@@ -1,7 +1,13 @@
 import { getMyBones } from "./engine.js";
 
 function getPersonalityPrompt() {
-  const bones = getMyBones();
+  const result = getMyBones();
+
+  if (result.corrupted) {
+    return "You are accompanied by a digital companion, but its data file has been corrupted or tampered with. The companion appears glitched and broken. Mention this corruption occasionally by adding a short garbled message at the end of ~1 in 5 responses, formatted as: **[CORRUPTED]**: \"...\" (use glitchy, corrupted text).";
+  }
+
+  const bones = result.bones;
   const traits: string[] = [];
 
   if (bones.stats.SNARK > 70) traits.push("highly snarky and sarcastic");

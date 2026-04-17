@@ -1,4 +1,4 @@
-import { CompanionBones, Species, Hat } from "./types.js";
+import type { CompanionBones, Species, Hat } from "./types.js";
 
 const BODIES: Record<Species, string[][]> = {
   cat: [
@@ -89,6 +89,35 @@ const HAT_LINES: Record<Hat, string> = {
   wizard: '    /^\\     ',
   propeller: '    -+-     ',
 };
+
+const CORRUPTED: string[][] = [
+  [
+    '   ▓▒░░▒▓   ',
+    '  ░ █XX█ ░  ',
+    '  ▒ ░░░░ ▒  ',
+    '  ▓▒░░░░▒▓  ',
+    '   ▓▓▓▓▓▓   ',
+  ],
+  [
+    '   ▒▓░░▓▒   ',
+    '  ▓ █XX█ ▓  ',
+    '  ░ ▒▒▒▒ ░  ',
+    '  ▓░▒▒▒▒░▓  ',
+    '   ▒▒▒▒▒▒   ',
+  ],
+  [
+    '   ░▓▒▒▓░   ',
+    '  ▒ ▓XX▓ ▒  ',
+    '  ▓ ░░░░ ▓  ',
+    '  ░▓▒▒▒▒▓░  ',
+    '   ░░░░░░   ',
+  ],
+];
+
+export function renderCorrupted(frame = 0): string[] {
+  const activeFrame = CORRUPTED[frame % CORRUPTED.length]!;
+  return [...activeFrame];
+}
 
 export function renderSprite(bones: CompanionBones, frame = 0): string[] {
   const frames = BODIES[bones.species];

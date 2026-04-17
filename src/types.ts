@@ -34,6 +34,19 @@ export type Companion = CompanionBones & CompanionSoul & {
   hatchedAt: number;
 };
 
+export type BuddyFile = {
+  version: 1;
+  owner: string;
+  hatchedAt: number;
+  bones: CompanionBones;
+  sig: string;
+};
+
+export type BuddyLoadResult = {
+  bones: CompanionBones;
+  corrupted: boolean;
+};
+
 export const RARITY_WEIGHTS = {
   common: 60,
   uncommon: 25,

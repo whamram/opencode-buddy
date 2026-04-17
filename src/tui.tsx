@@ -15,7 +15,7 @@ export default {
       const data = pendingExport();
       if (!data) return;
       setPendingExport(null);
-      const owner = os.userInfo().username || "defaultUser";
+      const owner = `${os.userInfo().username || "defaultUser"}@${os.hostname() || "localhost"}`;
       api.ui.dialog.replace(() => (
         <api.ui.DialogPrompt
           title="Export Buddy"
@@ -41,7 +41,7 @@ export default {
     createEffect(() => {
       if (!pendingImport()) return;
       setPendingImport(null);
-      const owner = os.userInfo().username || "defaultUser";
+      const owner = `${os.userInfo().username || "defaultUser"}@${os.hostname() || "localhost"}`;
       api.ui.dialog.replace(() => (
         <api.ui.DialogPrompt
           title="Import Buddy"
@@ -102,7 +102,7 @@ export default {
         category: "Opencode Buddy",
         slash: { name: "buddyexport", aliases: ["bexp"] },
         onSelect: () => {
-          const owner = os.userInfo().username || "defaultUser";
+          const owner = `${os.userInfo().username || "defaultUser"}@${os.hostname() || "localhost"}`;
           const data = exportBuddy(owner);
           if (!data) {
             api.ui.toast({ title: "Buddy", message: "No buddy file found to export", variant: "error", duration: 15000 });

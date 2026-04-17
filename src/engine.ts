@@ -1,13 +1,20 @@
 import os from "node:os";
-import type { CompanionBones, Rarity, Species, StatName } from "./types.js";
 import {
   EYES,
   HATS,
   RARITIES,
   RARITY_WEIGHTS,
   SPECIES,
-  STAT_NAMES
+  STAT_NAMES,
 } from "./types.js";
+import type {
+  BuddyLoadResult,
+  CompanionBones,
+  Rarity,
+  Species,
+  StatName,
+} from "./types.js";
+import { isCorrupted, loadBuddy, saveBuddy } from "./buddy-file.js";
 
 const SPECIES_NAMES: Record<Species, string[]> = {
   duck: [
@@ -196,8 +203,22 @@ export function generateBones(identifier: string): CompanionBones {
   };
 }
 
-export function getMyBones(): CompanionBones {
+export function getMyBones(): BuddyLoadResult {
   const username = os.userInfo().username || "defaultUser";
   const hostname = os.hostname() || "localhost";
-  return generateBones(`${username}@${hostname}`);
+  const owner = `${username}@${hostname}`;
+  const corrupted = isCorrupted(owner);
+
+  if (corrupted) {
+    return { bones: generateBones(owner), corrupted: true };
+  }
+
+  const file = loadBuddy(owner);
+  if (file) {
+    return { bones: file.bones, corrupted: false };
+  }
+
+  const bones = generateBones(owner);
+  saveBuddy(bones, owner);
+  return { bones, corrupted: false };
 }

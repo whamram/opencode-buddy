@@ -428,6 +428,35 @@ const HAT_LINES: Record<Hat, string> = {
   tinyduck: '    ,>      ',
 };
 
+const CORRUPTED: string[][] = [
+  [
+    '   ▓▒░░▒▓   ',
+    '  ░ █XX█ ░  ',
+    '  ▒ ░░░░ ▒  ',
+    '  ▓▒░░░░▒▓  ',
+    '   ▓▓▓▓▓▓   ',
+  ],
+  [
+    '   ▒▓░░▓▒   ',
+    '  ▓ █XX█ ▓  ',
+    '  ░ ▒▒▒▒ ░  ',
+    '  ▓░▒▒▒▒░▓  ',
+    '   ▒▒▒▒▒▒   ',
+  ],
+  [
+    '   ░▓▒▒▓░   ',
+    '  ▒ ▓XX▓ ▒  ',
+    '  ▓ ░░░░ ▓  ',
+    '  ░▓▒▒▒▒▓░  ',
+    '   ░░░░░░   ',
+  ],
+];
+
+export function renderCorrupted(frame = 0): string[] {
+  const activeFrame = CORRUPTED[frame % CORRUPTED.length]!;
+  return [...activeFrame];
+}
+
 export function renderSprite(bones: CompanionBones, frame = 0): string[] {
   const frames = BODIES[bones.species];
   const body = frames[frame % frames.length]!.map((line) =>

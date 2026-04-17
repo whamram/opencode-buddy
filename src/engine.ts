@@ -198,5 +198,6 @@ export function generateBones(identifier: string): CompanionBones {
 
 export function getMyBones(): CompanionBones {
   const username = os.userInfo().username || "defaultUser";
-  return generateBones(username);
+  const hostname = os.hostname() || "localhost";
+  return generateBones(`${username}@${hostname}`);
 }

@@ -1,61 +1,38 @@
-# 👾 opencode-buddy
+# OpenCode Buddy
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Bun](https://img.shields.io/badge/runtime-Bun-black.svg)
+**OpenCode Buddy** adds a digital companion to OpenCode cryptographically tied to your specific device. On first launch you'll get one of 18 buddies with a rarity, unique name, and personality that influence its behavior. *Based on the POC created by @azinak and inspired by Claude Code's `/buddy`*
 
-**opencode-buddy** is a gamified, digital companion (plugin) tailored exclusively for the `OpenCode` environment. Harnessing the exact local parameters of your machine, it hatches a unique AI-driven companion that lives inside your terminal interface.
+# Features
+- **Deterministic Engine:** Based on a lightning-fast Mulberry32 PRNG, the unique combination of your username and hostname will always hatch the same unique buddy.
+- **Rarities and Stats:** Hatch one of 18 unique ASCII species ranging from `Common` to `Legendary` with stats that influence and determine its personality.
+- **Buddy Responses:** See your buddy respond to your work with messages influenced by its unique personality, injected into the system prompt.
+- **TUI Integration:** A lively, fidgeting animation widget injected directly into the OpenCode interface.
+- **Import and Export Your Buddy:** Your buddy's stats live in a file in your config directory. Use `/buddyimport` and `/buddyexport` to move your favorite buddy to a new machine or trade with your friends. Don't try to edit your buddy's cryptographically derived stats or it'll become corrupted!
+- **Interactive Slash Commands:** Run `/buddyfeed` `/buddypet` straight from your terminal to keep your companion happy.
 
----
+# Installation
+Since this is an OpenCode plugin, no complex global installation is required.
 
-## 🚀 Features
-
-- 🎲 **Deterministic Gacha Engine:** Based on a lightning-fast `Mulberry32` PRNG, your machine will always hatch the same unique buddy. 
-- 🐾 **ASCII Species & Rarities:** Collectable companions including Cats, Dragons, Ducks, Ghosts, and Robots ranging from `Common` to `Legendary`.
-- ❤️ **AI Soul Injection:** Overrides `OpenCode`'s LLM system prompts. Your buddy isn't just a static picture—its generated stats (Snark, Chaos, Patience) dictate how the AI responds to your code queries!
-- 🎨 **TUI Integration:** A lively, fidgeting animation widget injected directly into the OpenCode `home_prompt`.
-- 🕹️ **Interactive Slash Commands:** Run `/buddy feed` or `/buddy pet` straight from your terminal to keep your companion happy.
-
----
-
-## 💻 Installation
-
-Since this is an OpenCode extension, no complex global installation is required.
-
-### 1. Link the Plugin Locally
-Clone this repository to your preferred location:
-```bash
-git clone https://github.com/azinak/opencode-buddy.git
-cd opencode-buddy
-bun install
+Clone this repository into your `~/.config/opencode/` directory:
+```
+git clone https://github.com/whamram/opencode-buddy.git
 ```
 
-### 2. Add to OpenCode Configuration
-OpenCode manages its global plugins via a central `package.json` located at `~/.config/opencode/`.
+OpenCode manages its global plugins via a central package.json located at ~/.config/opencode/
 
 To install the buddy plugin globally to your OpenCode:
-```bash
-cd ~/.config/opencode
-bun add /path/to/your/opencode-buddy
 ```
-*(Replace `/path/to/your/opencode-buddy` with the actual path, e.g. `/home/aziz/Desktop/.../opencode-buddy`)*
+opencode plugin ~/.config/opencode/opencode-buddy/ --global
+```
 
-### 3. Activate the Plugin
-Once the dependencies are updated, restart the `opencode` CLI or run `/plugin activate opencode-buddy` if OpenCode supports live activation.
-The TUI will dynamically load the buddy widget right above your prompt, and the AI Soul will take over! 🧠
-
----
-
-## 🛠️ Usage
-
+# Usage
 Simply write your code and prompt as usual! When you trigger errors, your buddy's personality will reflect in the AI's response.
-You can interact with your buddy using predefined slash commands:
-- `/buddypet` (or `/buddy pet`): Give your companion some affection.
-- `/buddyfeed` (or `/buddy feed`): Feed your companion to refill its happiness gauge.
 
----
+# Roadmap
+- [ ] XP system to upgrade your buddy over time, unlocking hats and increasing its rarity.
+- [ ] Cloud signing system to sign your buddy for trading.
 
-## 🔮 Roadmap / Future Enhancements
-- [ ] **Global Leaderboards**: Sync XP and levels to a global cloud function.
-- [ ] **Buddy Evolution**: Automatically grant rare ASCII hats when the buddy reaches level 10, 50, and 100.
-- [ ] **Error Console Reactions**: If a `shell` tool execution fails, trigger an angry or sad ASCII frame dynamically.
+#### License
+This project is licensed under the [MIT License](LICENSE).
+
+Based on the original work by [@azinak](https://github.com/azinak).

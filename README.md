@@ -10,7 +10,7 @@
 - **Buddy Responses:** See your buddy respond to your work with messages influenced by its unique personality, injected into the system prompt.
 - **TUI Integration:** A lively, fidgeting animation widget injected directly into the OpenCode interface.
 - **Import and Export Your Buddy:** Your buddy's stats live in a file in your config directory. Use `/buddyimport` and `/buddyexport` to move your favorite buddy to a new machine or trade with your friends. Don't try to edit your buddy's cryptographically derived stats or it'll become corrupted!
-- **Interactive Slash Commands:** Run `/buddyfeed` `/buddypet` straight from your terminal to keep your companion happy.
+- **Interactive Slash Commands:** Run `/pet` straight from your terminal to keep your companion happy.
 
 # Installation
 Since this is an OpenCode plugin, no complex global installation is required.

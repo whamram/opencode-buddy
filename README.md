@@ -2,7 +2,7 @@
 
 ![OpenCode Buddy Screenshot](screenshot-2026-04-18_01-09-06.png)
 
-**OpenCode Buddy** adds a digital companion to OpenCode cryptographically tied to your specific device. On first launch you'll get one of 18 buddies with a rarity, unique name, and personality that influence its behavior. *Based on the POC created by @azinak and inspired by Claude Code's `/buddy`*
+**OpenCode Buddy** adds a digital companion to OpenCode cryptographically tied to your specific device. On first launch you'll get one of 18 buddies with a rarity, unique name, and personality that influence its behavior.
 
 # Features
 - **Deterministic Engine:** Based on a lightning-fast Mulberry32 PRNG, the unique combination of your username and hostname will always hatch the same unique buddy.

@@ -78,7 +78,6 @@ export default {
       {
         title: "Pet Buddy",
         value: "pet_buddy",
-        description: "Pet your terminal buddy",
         category: "Opencode Buddy",
         slash: { name: "pet" },
         onSelect: () => {
@@ -88,7 +87,6 @@ export default {
       {
         title: "Export Buddy",
         value: "export_buddy",
-        description: "Export your buddy file for transfer",
         category: "Opencode Buddy",
         slash: { name: "buddyexport", aliases: ["bexp"] },
         onSelect: () => {
@@ -104,7 +102,6 @@ export default {
       {
         title: "Import Buddy",
         value: "import_buddy",
-        description: "Import a buddy file from another machine",
         category: "Opencode Buddy",
         slash: { name: "buddyimport", aliases: ["bimp"] },
         onSelect: () => {
